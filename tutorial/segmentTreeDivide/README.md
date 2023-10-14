@@ -28,6 +28,7 @@
 此时回溯就不需要删除操作了，而是类似可持久化的思路，实现回退功能即可。
 
 ## 模板参数说明
+
 `T`：操作标记的类型
 
 `N`:线段树分治的时间轴长度，为了某些题目方便，本模板建树时统一从0建到N。即有效下标为[0,N]多一个下标。
@@ -52,6 +53,15 @@
 `slove()`执行线段树分治算法求解，在求解完成时，通过solveNotify 外部接口通知外部调用者求解完成。
 
 ## 快速上手
+
+算法模板实例化方式
+```c++
+chino::segmentTreeDivide<T> segtd(N);
+segtd.doOperator=doOperator(const T &oper);
+segtd.saveState=saveState();
+segtd.loadState=loadState();
+segtd.solveNotify=solveNotify(int pos);
+```
 
 算法模板源码见：[线段树分治算法模板文件](../../template/dataStructure/segmentTreeDivide.h) 
 

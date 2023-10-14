@@ -2,7 +2,7 @@
  * @Author: winterzz1 1002658987@qq.com
  * @Date: 2023-09-30 23:56:47
  * @LastEditors: winterzz1 1002658987@qq.com
- * @LastEditTime: 2023-10-01 01:39:57
+ * @LastEditTime: 2023-10-14 18:22:21
  * @FilePath: /chino-acm-template/template/dataStructure/rollbackArray.h
  * @Description: 可回滚数组
  */
@@ -61,6 +61,12 @@ namespace chino
             return data[idx];
         }
 
+        /**
+         * @description: 数组设置值
+         * @param {size_t} idx 下标
+         * @param {bool} commit 是否提交到历史操作
+         * @return {*}
+         */
         void set(const size_t idx, const T &val, bool commit = true)
         {
             if (commit)
@@ -70,11 +76,20 @@ namespace chino
             data[idx] = val;
         }
 
+        /**
+         * @description: 可回滚数据结构变基
+         * @return {*}
+         */
         void rebase()
         {
             stk.clear();
         }
 
+        /**
+         * @description: 回滚到某个历史版本
+         * @param {unsigned int} timestamp 时间戳
+         * @return {*}
+         */
         void rollback(unsigned int timestamp)
         {
             if (timestamp < 0)
@@ -89,6 +104,10 @@ namespace chino
             }
         }
 
+        /**
+         * @description: 获取当前版本的时间戳
+         * @return {*}
+         */
         unsigned int getStamp() const
         {
             return stk.size();
@@ -103,9 +122,14 @@ namespace chino
             return data;
         }
 
+        /**
+         * @description: 获取可回滚数组的数组长度
+         * @return {*}
+         */
         size_t size() const
         {
             return data.size();
         }
     };
 }
+

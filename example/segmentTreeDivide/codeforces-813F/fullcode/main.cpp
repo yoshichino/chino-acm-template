@@ -2,111 +2,11 @@
  * @Author: winterzz1 1002658987@qq.com
  * @Date: 2023-10-01 15:05:32
  * @LastEditors: winterzz1 1002658987@qq.com
- * @LastEditTime: 2023-10-01 15:13:27
+ * @LastEditTime: 2023-10-14 17:17:57
  * @FilePath: /chino-acm-template/example/segmentTreeDivide/codeforces-813F/fullcode/main.cpp
- * @Description: 线段树分治模板题
+ * @Description: 线段树分治算法
  */
-
-#include <functional>
-#include <vector>
-#include <queue>
-#include <cstdio>
-namespace chino
-{
-    template <typename T>
-    class segmentTreeDivide
-    {
-    private:
-        int N;
-        std::vector<std::vector<T>> opers;
-        std::function<void(const T &oper)> doOperator;
-        std::function<void()> saveState;
-        std::function<void()> loadState;
-        std::function<void(int pos)> solveNotify;
-
-        void addOperator_(int l, int r, const T &oper, int root, int L, int R)
-        {
-            if (l == L && r == R)
-            {
-                opers[root].push_back(oper);
-                return;
-            }
-            auto mid = (L + R) >> 1;
-            if (r <= mid)
-            {
-                addOperator_(l, r, oper, root << 1, L, mid);
-            }
-            else if (l > mid)
-            {
-                addOperator_(l, r, oper, (root << 1) | 1, mid + 1, R);
-            }
-            else
-            {
-                addOperator_(l, mid, oper, root << 1, L, mid);
-                addOperator_(mid + 1, r, oper, (root << 1) | 1, mid + 1, R);
-            }
-        }
-        void slove_(int root, int L, int R)
-        {
-            if (doOperator)
-            {
-                for (const auto &i:opers[root])
-                {
-                    doOperator(i);
-                }
-            }
-            if (L == R)
-            {
-                if (solveNotify)
-                {
-                    solveNotify(L);
-                }
-                return;
-            }
-
-            
-
-            if (saveState)
-            {
-                saveState();
-            }
-            auto mid = (L + R) >> 1;
-            slove_(root << 1, L, mid);
-
-            if (loadState)
-            {
-                loadState();
-            }
-            slove_((root << 1) | 1, mid + 1, R);
-        }
-
-    public:
-        segmentTreeDivide(
-            int N_,
-            std::function<void(const T &oper)> doOperator_,
-            std::function<void()> saveState_,
-            std::function<void()> loadState_,
-            std::function<void(int pos)> solveNotify_) : N(N_),
-                                                         doOperator(std::move(doOperator_)),
-                                                         saveState(std::move(saveState_)),
-                                                         loadState(std::move(loadState_)),
-                                                         solveNotify(std::move(solveNotify_))
-        {
-            opers.resize((N + 1) << 2);
-        }
-
-        void addOperator(int l, int r, const T &oper)
-        {
-            addOperator_(l, r, oper, 1, 0, N);
-        }
-
-        void slove()
-        {
-            slove_(1, 0, N);
-        }
-    };
-}
-#include <vector>
+#include <bits/stdc++.h>
 namespace chino
 {
     template <typename T>
@@ -119,16 +19,29 @@ namespace chino
     public:
         rollbackArray() = default;
 
+        /**
+         * @description: 构造一个尺寸为N的可回滚数组
+         * @param {int} N 尺寸
+         */
         rollbackArray(int N)
         {
             data.resize(N);
         }
 
+        /**
+         * @description: 根据std::vector构造
+         * @param {vector<T>} data_ 输入数据
+         */
         rollbackArray(std::vector<T> data_)
         {
             data = std::move(data_);
         }
 
+        /**
+         * @description: 根据c语言原始数组构造
+         * @param {vector<T>} data_ 输入数据
+         * @param {int} N 数组长度
+         */
         rollbackArray(T data_[], int N)
         {
             data.resize(N);
@@ -138,9 +51,13 @@ namespace chino
             }
         }
 
+        /**
+         * @description: 数组取值
+         * @param {size_t} idx 数组下标
+         * @return {T}
+         */
         T at(const size_t idx) const &
         {
-
             return data[idx];
         }
 
@@ -177,6 +94,10 @@ namespace chino
             return stk.size();
         }
 
+        /**
+         * @description: 强制类型转换为std::vector
+         * @return rollbackArray中的数据
+         */
         operator std::vector<T>() const
         {
             return data;
@@ -188,15 +109,13 @@ namespace chino
         }
     };
 }
-
-#include <cstdlib>
 namespace chino
 {
 
     struct rollbackDisjointSetUnionNode
     {
-        int father;
-        int rank;
+        int father;  //父节点
+        int rank;    //秩
     };
 
     class rollbackDisjointSetUnion
@@ -265,10 +184,119 @@ namespace chino
         }
     };
 }
-#include <vector>
-#include <cstdio>
+namespace chino
+{
+    //!!使用前需要填充所有的外部接口
+    // T类型，操作标记，储存任何有关操作的数据
+    template <typename T>
+    class segmentTreeDivide
+    {
+    public:
+        // 外部接口：
+        std::function<void(const T &oper)> doOperator; // 外部接口：如何处理一个操作标记？（传入addOperator添加的操作标记）
+        std::function<void()> saveState;               // 外部接口：当处理完成线段树某节点上的所有标记时，如何储存当前状态？
+        std::function<void()> loadState;               // 外部接口：当线段树递归完成左子树操作时，如何回溯？
+        std::function<void(int pos)> solveNotify;      // 外部接口：当求解完成时（递归到叶子结点），需要做何种操作？传入当前叶子结点下标）
+
+    private:
+        int N;
+        std::vector<std::vector<T>> opers;
+
+        /**
+         * @description:   类似线段树修改操作，将一个区间操作[l,r]拆解为至多2*logN个操作
+         * @param {int} l  修改区间的左端点
+         * @param {int} r  修改区间的右端点
+         * @param {const T&} oper 修改区间的操作标记
+         * @param {int} root 线段树遍历的当前根节点（调用者无需关注）
+         * @param {int} L    线段树节点的左端点（调用者无需关注）
+         * @param {int} R    线段树节点的右端点（调用者无需关注）
+         */
+        void addOperator_(int l, int r, const T &oper, int root, int L, int R)
+        {
+            if (l == L && r == R)
+            {
+                opers[root].push_back(oper);
+                return;
+            }
+            auto mid = (L + R) >> 1;
+            if (r <= mid)
+            {
+                addOperator_(l, r, oper, root << 1, L, mid);
+            }
+            else if (l > mid)
+            {
+                addOperator_(l, r, oper, (root << 1) | 1, mid + 1, R);
+            }
+            else
+            {
+                addOperator_(l, mid, oper, root << 1, L, mid);
+                addOperator_(mid + 1, r, oper, (root << 1) | 1, mid + 1, R);
+            }
+        }
+
+        /**
+         * @description: 线段树分治核心逻辑，实际上就是一次二叉树的先序遍历。
+         * @param {int} root 线段树遍历当前根节点（调用者无需关注）
+         * @param {int} L    线段树节点的左端点（调用者无需关注）
+         * @param {int} R    线段树节点的右端点（调用者无需关注）
+         */
+        void slove_(int root, int L, int R)
+        {
+            // 按照懒标记处理修改
+            for (const auto &i : opers[root])
+            {
+                doOperator(i);
+            }
+
+            // 达到线段树叶子节点，通知问题已经解决
+            if (L == R)
+            {
+                solveNotify(L);
+                return;
+            }
+            // 否则非叶子结点，首先记录保存当前状态
+            saveState();
+
+            auto mid = (L + R) >> 1;
+            // 递归先解决左侧问题
+            slove_(root << 1, L, mid);
+            // 解决完成后撤销修改
+            loadState();
+
+            // 撤销后解决右侧问题
+            slove_((root << 1) | 1, mid + 1, R);
+        }
+
+    public:
+        segmentTreeDivide(int N_) : N(N_)
+        {
+            opers.resize((N + 1) << 2);
+        }
+
+        /**
+         * @description:   类似线段树修改操作，将一个区间操作[l,r]拆解为至多2*logN个操作
+         * @param {int} l  修改区间的左端点
+         * @param {int} r  修改区间的右端点
+         * @param {const T&} oper 修改区间的操作标记
+         */
+        void addOperator(int l, int r, const T &oper)
+        {
+            addOperator_(l, r, oper, 1, 0, N);
+        }
+
+        /**
+         * @description: 线段树分治核心逻辑，实际上就是一次二叉树的先序遍历。
+         * 在求解完成时，通过solveNotify 外部接口通知外部调用者求解完成。
+         */
+        void slove()
+        {
+            slove_(1, 0, N);
+        }
+    };
+}
+
 using namespace std;
-const int MAXN = 400005;
+const int MAXN = 200005;
 struct node
 {
     int u, v;
@@ -276,10 +304,14 @@ struct node
 bool ans[MAXN];
 int main(int argc, char const *argv[])
 {
-    vector<pair<int, unsigned int>> stk{{1, 0}}; 
-    int n, m, k;
+    vector<pair<int, unsigned int>> stk{{1, 0}}; // 是否为二分图 - 可回退并查集当前的时间戳
+    int n, q;
+    map<pair<int, int>, int> mp;
     chino::rollbackDisjointSetUnion dsu(2 * MAXN);
-    auto doOperator = [&](const node &op)
+    scanf("%d %d", &n, &q);
+    chino::segmentTreeDivide<node> segtd(q);
+
+    segtd.doOperator = [&](const node &op)
     {
         if (stk[stk.size() - 1].first == 0)
         {
@@ -288,46 +320,60 @@ int main(int argc, char const *argv[])
 
         dsu.join(op.u, op.v + n);
         dsu.join(op.v, op.u + n);
-        if (dsu.find(op.u) == dsu.find(op.u+n)||
-            dsu.find(op.v) == dsu.find(op.v+n))
+        if (dsu.find(op.u) == dsu.find(op.u + n) ||
+            dsu.find(op.v) == dsu.find(op.v + n))
         {
             stk[stk.size() - 1].first = 0;
         }
     };
-    auto saveState = [&]()
+
+    segtd.saveState = [&]()
     {
         auto now = stk[stk.size() - 1];
         stk.push_back({now.first, dsu.getStamp()});
     };
-    auto loadState = [&]()
+
+    segtd.loadState = [&]()
     {
         dsu.rollback(stk[stk.size() - 1].second);
         stk.pop_back();
     };
-    auto solveNotify = [&](int pos)
-    {        
+
+    segtd.solveNotify = [&](int pos)
+    {
         ans[pos] = stk[stk.size() - 1].first;
     };
-    scanf("%d %d %d", &n, &m, &k);
-    chino::segmentTreeDivide<node> segtd(k, doOperator, saveState, loadState, solveNotify);
-    while (m--)
+
+    for (int i = 0; i < q; ++i)
     {
-        int u, v, l, r;
-        scanf("%d %d %d %d", &u, &v, &l, &r);
-        if(l==r)continue;
-        segtd.addOperator(l, r - 1, {u, v});
+        int u, v;
+        scanf("%d %d", &u, &v);
+        auto iter = mp.find(make_pair(u, v));
+        if (iter == mp.end())
+        {
+            mp[make_pair(u, v)] = i;
+            continue;
+        }
+        segtd.addOperator(iter->second, i - 1, {u, v});
+        mp.erase(iter);
+    }
+    for (auto &iter : mp)
+    {
+        segtd.addOperator(iter.second, q, {iter.first.first, iter.first.second});
     }
     segtd.slove();
-    for (auto i = 0; i < k; ++i)
+    for (auto i = 0; i < q; ++i)
     {
-        printf("%s\n", ans[i] ? "Yes" : "No");
+        printf("%s\n", ans[i] ? "YES" : "NO");
     }
 
     return 0;
 }
 /*
-3 3 3
-1 2 0 2
-2 3 0 3
-1 3 1 2
+3 5
+2 3
+1 3
+1 2
+1 2
+1 2
 */

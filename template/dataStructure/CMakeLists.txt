@@ -1,6 +1,5 @@
 project(dataStructre)
 
-
 aux_source_directory("./" dataStructreSrc)
 
 add_library(dataStructre INTERFACE ${dataStructreSrc})

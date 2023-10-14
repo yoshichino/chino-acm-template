@@ -1,3 +1,11 @@
+<!--
+ * @Author: winterzz1 1002658987@qq.com
+ * @Date: 2023-10-01 03:00:18
+ * @LastEditors: winterzz1 1002658987@qq.com
+ * @LastEditTime: 2023-10-14 18:24:40
+ * @FilePath: /chino-acm-template/README.md
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 # 四糸智乃的算法模板
 
 ## 前言
@@ -37,10 +45,14 @@
 
 ## 导航
 
+### 数据结构
 
 [线段树分治](./tutorial/segmentTreeDivide/README.md)
 
-[可回退数组]()
+[可回退数组](./tutorial/rollbackArray/README.md)
 
-[可回退并查集]()
+[可回退并查集](./tutorial/rollbackDisjointSetUnion/README.md)
 
+### 数学
+
+### 动态规划

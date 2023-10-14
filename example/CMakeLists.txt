@@ -1,3 +1,5 @@
 #segmentTreeDivide
 add_subdirectory(segmentTreeDivide/luogu-P5787)
 add_subdirectory(segmentTreeDivide/codeforces-813F)
+#rescanTreeDP
+add_subdirectory(rescanTreeDP/codeforces-708C)

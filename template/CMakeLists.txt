@@ -1,1 +1,2 @@
 add_subdirectory(dataStructure)
+add_subdirectory(dynamicProgramming)
