@@ -57,10 +57,22 @@
 算法模板实例化方式
 ```c++
 chino::segmentTreeDivide<T> segtd(N);
-segtd.doOperator=doOperator(const T &oper);
-segtd.saveState=saveState();
-segtd.loadState=loadState();
-segtd.solveNotify=solveNotify(int pos);
+segtd.doOperator = [](const T &op)
+{
+    return;
+};
+segtd.saveState = []()
+{
+    return;
+};
+segtd.loadState = []()
+{
+    return;
+};
+segtd.solveNotify = [](int pos)
+{
+    return;
+};
 ```
 
 算法模板源码见：[线段树分治算法模板文件](../../template/dataStructure/segmentTreeDivide.h) 
