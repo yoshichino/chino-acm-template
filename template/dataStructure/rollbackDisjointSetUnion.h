@@ -2,7 +2,7 @@
  * @Author: winterzz1 1002658987@qq.com
  * @Date: 2023-10-01 00:58:13
  * @LastEditors: winterzz1 1002658987@qq.com
- * @LastEditTime: 2023-10-14 18:21:03
+ * @LastEditTime: 2023-10-17 01:20:20
  * @FilePath: /chino-acm-template/template/dataStructure/rollbackDisjointSetUnion.h
  * @Description: 可回滚并查集
  */
@@ -33,7 +33,7 @@ namespace chino
             data = std::move(chino::rollbackArray<rollbackDisjointSetUnionNode>(N + 1));
             for (auto i = 0; i <= N; ++i)
             {
-                data.set(i, {i, 1}, false);
+                data.set(i, {i, 0}, false);
             }
         }
 

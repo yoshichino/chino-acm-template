@@ -9,3 +9,6 @@ add_subdirectory(divBlock)
 add_subdirectory(fastModulo)
 #modInt
 add_subdirectory(modInt)
+#segmentTree
+add_subdirectory(segmentTree/luogu-P3372)
+add_subdirectory(segmentTree/luogu-P1083)
