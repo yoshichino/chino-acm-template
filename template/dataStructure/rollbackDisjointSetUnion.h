@@ -2,7 +2,7 @@
  * @Author: winterzz1 1002658987@qq.com
  * @Date: 2023-10-01 00:58:13
  * @LastEditors: winterzz1 1002658987@qq.com
- * @LastEditTime: 2023-10-17 01:20:20
+ * @LastEditTime: 2023-10-17 22:50:10
  * @FilePath: /chino-acm-template/template/dataStructure/rollbackDisjointSetUnion.h
  * @Description: 可回滚并查集
  */
@@ -40,7 +40,7 @@ namespace chino
         /**
          * @description: 可回滚并查集初始化
          * @param {int} N需要初始化的长度
-         * @note 实际初始化的元素为从0到N，多一个方便不同题目的下标从0或者从1开始。
+         * @note 实际初始化的元素为从 0 到 N ，多一个方便不同题目的下标从 0 或者从 1 开始。
          * @return {*}
          */
         void init(int N)

@@ -4,7 +4,7 @@
  * @LastEditors: winterzz1 1002658987@qq.com
  * @LastEditTime: 2023-10-17 01:50:11
  * @FilePath: /chino-acm-template/template/dataStructure/segmentTreeSimpleMin.h
- * @Description: 简单线段树 最小值
+ * @Description: 简单线段树——区间最小值
  */
 #include "segmentTreeBase.h"
 namespace chino

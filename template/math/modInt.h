@@ -2,9 +2,9 @@
  * @Author: winterzz1 1002658987@qq.com
  * @Date: 2023-10-15 13:30:01
  * @LastEditors: winterzz1 1002658987@qq.com
- * @LastEditTime: 2023-10-15 22:37:18
+ * @LastEditTime: 2023-10-18 02:53:42
  * @FilePath: /chino-acm-template/template/math/modInt.h
- * @Description: 32位模整形,来自网络
+ * @Description: int32 模整形
  */
 namespace chino
 {

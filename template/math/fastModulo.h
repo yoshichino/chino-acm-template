@@ -2,9 +2,9 @@
  * @Author: winterzz1 1002658987@qq.com
  * @Date: 2023-10-15 13:29:46
  * @LastEditors: winterzz1 1002658987@qq.com
- * @LastEditTime: 2023-10-15 15:25:04
+ * @LastEditTime: 2023-10-18 02:53:44
  * @FilePath: /chino-acm-template/template/math/fastModulo.h
- * @Description: 来自日本友人的黑科技快速取模
+ * @Description: int64 快速取模
  */
 using i64 = long long;
 using u64 = unsigned long long;

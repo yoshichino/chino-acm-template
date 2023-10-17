@@ -2,9 +2,9 @@
  * @Author: winterzz1 1002658987@qq.com
  * @Date: 2023-10-16 10:40:14
  * @LastEditors: winterzz1 1002658987@qq.com
- * @LastEditTime: 2023-10-17 01:49:27
+ * @LastEditTime: 2023-10-18 00:35:04
  * @FilePath: /chino-acm-template/template/dataStructure/segmentTreeSimpleAdd.h
- * @Description: 简单线段树
+ * @Description: 简单线段树——区间和
  */
 #include "segmentTreeBase.h"
 namespace chino

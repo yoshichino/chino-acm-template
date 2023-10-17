@@ -1,0 +1,65 @@
+
+% @Author: winterzz1 1002658987@qq.com
+% @Date: 2023-10-17 22:44:04
+% @LastEditors: winterzz1 1002658987@qq.com
+% @LastEditTime: 2023-10-17 22:52:23
+% @FilePath: /chino-acm-template/latex/main.tex
+% @Description: 模板latex-pdf
+
+\documentclass{article}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{CJK}
+\usepackage{blindtext}
+\usepackage{geometry}
+\usepackage{subfiles}
+\usepackage{titlesec}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+\lstset{
+  tabsize=4, 
+  frame=lines, 
+  commentstyle=\color{red!50!green!50!blue!50},
+  rulesepcolor=\color{red!20!green!20!blue!20},
+  keywordstyle=\color{blue!90}\bfseries, 
+  showstringspaces=false,
+  stringstyle=\tt, 
+  keepspaces=true, 
+  breakindent=50pt, 
+  numbers=left,
+  stepnumber=1,
+  numberstyle=\tt, 
+  basicstyle=\tt, 
+  showspaces=false, 
+  flexiblecolumns=true, 
+  breaklines=true,
+  breakautoindent=true,
+  breakindent=4em, 
+  escapeinside={`}{`},
+  escapebegin=\begin{CJK*}{UTF8}{gbsn},escapeend=\end{CJK*},
+  aboveskip=1em, 
+  fontadjust,
+  captionpos=t,
+  texcl=true,
+  extendedchars=false,columns=flexible,mathescape=true
+}
+\begin{document}
+\lstset{language=c++}%代码语言使用的是c++
+\lstset{breaklines}%自动将长的代码行换行排版
+\lstset{extendedchars=false}%解决代码跨页时，章节标题，页眉等汉字不显示的问题
+\begin{CJK*}{UTF8}{gbsn}
+\tableofcontents
+\newpage
+\section{数据结构}
+\subfile{dataStructure/dataStructure}
+\section{数学}
+\subfile{math/math}
+\end{CJK*}
+
+\end{document}
+
