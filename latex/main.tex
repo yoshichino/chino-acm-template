@@ -12,9 +12,16 @@
 \usepackage{listings}
 \usepackage{CJK}
 \usepackage{blindtext}
+\usepackage{caption}
+\usepackage{lipsum}
 \usepackage{geometry}
 \usepackage{subfiles}
 \usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{markdown}
+\usepackage{fancyhdr}
+\usepackage{float}
+
  \geometry{
  a4paper,
  total={170mm,257mm},
@@ -48,18 +55,87 @@
   texcl=true,
   extendedchars=false,columns=flexible,mathescape=true
 }
-\begin{document}
+\setlength{\parindent}{0pt}
+\markdownSetup{fencedCode = true} %markdown内联代码框
+\markdownSetup{hybrid = true} %markdown内联latex
+\markdownSetup{ %markdown内联图片设置
+  renderers = {
+    image = {\begin{figure}[H]
+      \centering
+
+      \includegraphics[width=0.5\textwidth]{#3}%
+      \ifx\empty#4\empty\else
+        \caption{#4}\label{fig:#1}%
+      \fi
+    \end{figure}},
+  }
+}
+
 \lstset{language=c++}%代码语言使用的是c++
 \lstset{breaklines}%自动将长的代码行换行排版
 \lstset{extendedchars=false}%解决代码跨页时，章节标题，页眉等汉字不显示的问题
+
+
+
+
+
+\begin{document}
+
+
 \begin{CJK*}{UTF8}{gbsn}
-\tableofcontents
+
+
+
+
+\date{2023-10-01}
+\title{四糸智乃的算法模板}
+\author{四糸智乃}
+
+\maketitle
+\begin{center}
+\includegraphics[width=1.0\textwidth]{./resource/title.jpg}
+\end{center}
+
 \newpage
+\newpage
+
+\twocolumn
+
+\tableofcontents
+
+\newcommand{\currentsection}{}
+\let\oldsection\section
+\renewcommand{\section}[1]{\oldsection{#1}\renewcommand{\currentsection}{#1}}
+
+\newcommand{\currentsubsection}{}
+\let\oldsubsection\subsection
+\renewcommand{\subsection}[1]{\oldsubsection{#1}\renewcommand{\currentsubsection}{#1}}
+
+\newcommand{\currentsubsubsection}{}
+\let\oldsubsubsection\subsubsection
+\renewcommand{\subsubsection}[1]{\oldsubsubsection{#1}\renewcommand{\currentsubsubsection}{#1}}
+
+
+\onecolumn
+\newpage
+
+\pagestyle{fancy}%清除原页眉页脚样式
+\fancyhead{} % 初始化页眉
+\fancyhead[C]{\textsl{\rightmark-\currentsubsection-\thepage}}
+\renewcommand{\headrulewidth}{4pt}
+\fancyfoot{} % 初始化页脚
+\fancyfoot[L]{https://github.com/yoshichino/chino-acm-template}
+
+\chapter{正文}
+
 \section{数据结构}
 \subfile{dataStructure/dataStructure}
 \section{数学}
 \subfile{math/math}
-\end{CJK*}
 
+\section{教程}
+\subfile{tutorial/tutorial}
+
+\end{CJK*}
 \end{document}
 

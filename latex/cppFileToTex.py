@@ -2,7 +2,7 @@
 Author: winterzz1 1002658987@qq.com
 Date: 2023-10-18 00:28:21
 LastEditors: winterzz1 1002658987@qq.com
-LastEditTime: 2023-10-18 01:48:47
+LastEditTime: 2023-10-18 23:19:09
 FilePath: /chino-acm-template/latex/cppFileToTex.py
 Description: tex脚本
 '''
@@ -14,7 +14,7 @@ class tex_section:
         self.description = description
         self.path = path
     def to_string(self) -> None:
-        return '\\subsubsection{'+self.description+'}\n\\lstinputlisting[language=C++]{'+self.path+'}\n\\newpage\n'
+        return '\\subsection{'+self.description+'}\n\\lstinputlisting[language=C++]{'+self.path+'}\n\\newpage\n'
     
 def get_description(path):
     f = open(path,'r', encoding='utf-8')
@@ -27,11 +27,15 @@ def get_description(path):
 
 
 template_begin='\\documentclass[../main.tex]{subfiles} % 使用 subfiles 文档类，指定主文档\n\\begin{document}\n'
-template_end='\\end{document}'
+template_end='\\end{document}\n'
+
+
+
 if __name__ == '__main__':
     script_path = os.path.split(os.path.realpath(__file__))[0]
     dst_path = script_path + "/../template"
-    print(dst_path)
+    if not os.path.exists(script_path+'/tutorial'):
+        os.mkdir(script_path+'/tutorial')
     for sub_folder in os.listdir(dst_path):
         sub_path=dst_path + "/" + sub_folder
         if os.path.isdir(sub_path):
@@ -45,3 +49,9 @@ if __name__ == '__main__':
                     f.write(sec.to_string())
             f.write(template_end)
             f.close()
+    dst_path = script_path + "/../tutorial"
+    f = open(script_path+"/tutorial/tutorial.tex",'w', encoding='utf-8')
+    f.write(template_begin)
+    for sub_folder in os.listdir(dst_path):
+        f.write('\\markdownInput{../tutorial/'+sub_folder+'/README.md}\n\\newpage\n')
+    f.write(template_end)

@@ -1,26 +1,18 @@
-<!--
- * @Author: winterzz1 1002658987@qq.com
- * @Date: 2023-10-01 21:41:41
- * @LastEditors: winterzz1 1002658987@qq.com
- * @LastEditTime: 2023-10-14 18:11:43
- * @FilePath: /chino-acm-template/tutorial/rollbackDisjointSetUnion/README.md
- * @Description: 可回退并查集教程
--->
-# 可回滚并查集
+### 可回滚并查集
 
 基于`可回滚并查集`实现的可回退并查集
 
- ## 该算法的使用条件
+#### 该算法的使用条件
 
 一般配合`线段树`分治，达到可并可拆并查集的效果。
 
-## 模板参数说明
+#### 模板参数说明
 
 `N`:可回滚并查集的长度（注意，首次使用要填入最大长度）
 
-## 接口说明
+#### 接口说明
 
-### 调用接口
+#### 调用接口
 
 `init(int N)` 并查集初始化，注意`N`不能大于算法模板实例化时传入的`N`。
     
@@ -36,7 +28,7 @@
 
 算法模板源码见：[可回滚并查集模板文件](../../template/dataStructure/rollbackDisjointSetUnion.h) 
 
-## 快速上手
+#### 快速上手
 
 算法模板实例化方式
 

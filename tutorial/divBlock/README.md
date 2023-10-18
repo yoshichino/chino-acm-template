@@ -1,26 +1,18 @@
-<!--
- * @Author: winterzz1 1002658987@qq.com
- * @Date: 2023-10-15 14:20:02
- * @LastEditors: winterzz1 1002658987@qq.com
- * @LastEditTime: 2023-10-15 14:32:47
- * @FilePath: /chino-acm-template/tutorial/divBlock/README.md
- * @Description: 整除分块教程
--->
-# 整除分块
+### 整除分块
 
 整除分块是数论里面一个挺重要的东西，数论入门的时候，积性函数枚举因子，枚举除数，都会用到它。
 
-## 算法使用条件
+#### 算法使用条件
 
-当需要枚举$j=\left\lfloor\frac{N}{i}\right\rfloor$时使用
+当需要枚举 $j=\left\lfloor\frac{N}{i}\right\rfloor$ 时使用
 
-## 模板参数说明
+#### 模板参数说明
 
 `n`:被除数
 
-## 接口说明
+#### 接口说明
 
-### 调用接口
+#### 调用接口
 
 `long long belone(long long x)` 获取除数为`x`时属于第几块。
 
@@ -30,7 +22,7 @@
 
 `divBlockSegments(long long n, std::function<void(long long id, long long l, long long r)> cb)` 整除分块，遍历每一颗并通过回调函数通知外部。
 
-## 快速上手
+#### 快速上手
 
 算法模板实例化方式
 

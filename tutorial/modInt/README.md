@@ -1,29 +1,20 @@
-<!--
- * @Author: winterzz1 1002658987@qq.com
- * @Date: 2023-10-15 15:31:48
- * @LastEditors: winterzz1 1002658987@qq.com
- * @LastEditTime: 2023-10-15 22:43:45
- * @FilePath: /chino-acm-template/tutorial/modInt/README.md
- * @Description: 取模整数，来自网络模板
--->
-
-# int32模整形
+### int32模整形
 取模整数，来自网络模板
 
-## 该算法的使用条件
+#### 该算法的使用条件
 
 质数取模的情况下，怕忘记取模。
 
 模数必须在编译期给定，不可为scanf输入的变量。
 
-## 接口说明
+#### 接口说明
 
-### 调用接口
+#### 调用接口
 
 `int get()` 转换为int类型
 
 
-## 快速上手
+#### 快速上手
 
 ```c++
 using mint=chino::ModInt<7340033>;

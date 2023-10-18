@@ -1,8 +1,8 @@
 <!--
  * @Author: winterzz1 1002658987@qq.com
  * @Date: 2023-10-01 03:00:18
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-10-15 22:07:48
+ * @LastEditors: winterzz1 1002658987@qq.com
+ * @LastEditTime: 2023-10-19 00:38:13
  * @FilePath: /chino-acm-template/README.md
  * @Description: README.md
 -->
@@ -85,3 +85,35 @@
 ### 动态规划
 
 ### 字符串处理
+
+## pdf生成
+
+### 环境准备
+
+使用`docker`容器作为`LaTeX`编译机，需要宿主机`10GB`以上剩余磁盘空间。
+
+```sh
+cd ./docker && docker build . -t latex
+```
+
+容器构建过程中会遇到交互。
+
+
+
+容器构建完毕后，在项目根目录执行
+
+```sh
+docker run -it -v `pwd`:'pwd'
+```
+
+### make & clean
+
+在容器中执行
+
+```sh
+#make
+cd ./latex && make
+
+#make clean
+cd ./latex && make clean
+```
